@@ -5,13 +5,11 @@ import { Button, StyleSheet, Text, View } from 'react-native';
 import axios from 'axios'
 
 async function lampada() {
-  await axios.get('http://192.168.0.26:80/luz').then(response => {
-    console.log(response.data);
-  })
+  await axios.get('http://192.168.0.26:80/luz').catch((error) => console.log(error))
 }
 
 async function tomada() {
-  await axios.get('http://192.168.0.26:80/tomada')
+  await axios.get('http://192.168.0.26:80/tomada').catch((error) => console.log(error))
 }
 
 export default function App() {
