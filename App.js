@@ -1,12 +1,25 @@
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { Button, StyleSheet, Text, View } from 'react-native';
+
+import axios from 'axios'
+
+async function lampada() {
+  await axios.get('http://192.168.0.26:80/luz').then(response => {
+    console.log(response.data);
+  })
+}
+
+async function tomada() {
+  await axios.get('http://192.168.0.26:80/tomada')
+}
 
 export default function App() {
   return (
     <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
+      <StatusBar style="light" />
+      <Button title="lâmpada" onPress={lampada}></Button>
+      <Button title="Ventilador" onPress={tomada}></Button>
     </View>
   );
 }
@@ -14,8 +27,14 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: '#282c34',
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  text: {
+    color: '#fff',
+    fontSize: 30,
+    alignItems: 'center',
+    textAlign: 'center'
   },
 });
